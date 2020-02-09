@@ -10,6 +10,7 @@
 * これを作りたい。とにかく作りたい。
   - https://codepen.io/hexagoncircle/pen/povdoXQ
 
+
 ## 入門
 
 * [Lesson1: どうでも良いことをゆっくり一度だけ言う](./index.html)
@@ -24,3 +25,8 @@
 ## 参考
 
 * https://developer.mozilla.org/ja/docs/Web/CSS/animation
+
+
+* https://codepen.io/malyw/pen/dGEhq
+  - overflow: hiddenで親の範囲外にはみ出た子要素を非表示にする
+    - animation translateyでドラムロール式にアニメーションするdiv要素に額縁が欲しい
