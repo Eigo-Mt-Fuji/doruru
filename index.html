@@ -43,9 +43,24 @@
                 animation-fill-mode: both;
             }
             
-            /* 「RightToLeft」を適用する箇所 */
+            /* 「RightToLeft」の動作内容 */
+            @keyframes Fadeout {
+                0% {
+                    opacity: 1;/* 不透明 */
+                }
+                100% {
+                    opacity: 0;/* 透明 */
+                }
+            }
+            div#lesson2.fadeout {
+                animation-duration: 2s;/* アニメーション時間 */
+                animation-name: Fadeout;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 12s;
+                animation-fill-mode: forwards;
+            }
             h1.double-slide1 {
-                animation-duration: 3s;/* アニメーション時間 */
+                animation-duration: 2s;/* アニメーション時間 */
                 animation-name: RightToLeft;/* アニメーション名 */
                 animation-iteration-count: 2;
                 animation-delay: 0s;
@@ -53,18 +68,18 @@
             }
 
             h1.double-slide2 {
-                animation-duration: 3s;/* アニメーション時間 */
+                animation-duration: 2s;/* アニメーション時間 */
                 animation-name: RightToLeft;/* アニメーション名 */
                 animation-iteration-count: 2;
-                animation-delay: 4s;
+                animation-delay: 2s;
                 animation-fill-mode: both;
             }
 
             h1.double-slide3 {
-                animation-duration: 3s;/* アニメーション時間 */
+                animation-duration: 2s;/* アニメーション時間 */
                 animation-name: RightToLeft;/* アニメーション名 */
                 animation-iteration-count: 2;
-                animation-delay: 7s;
+                animation-delay: 4s;
                 animation-fill-mode: both;
             }
 
@@ -97,6 +112,7 @@
         function onClickLesson(wraapperId, classNamePrefix) {
   
             const wrapper = document.getElementById(wraapperId);
+            wrapper.className = "fadeout"
             const elements = wrapper.children;
             for(let i = 0; i < elements.length; i++) {
 
