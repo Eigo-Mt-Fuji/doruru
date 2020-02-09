@@ -136,11 +136,7 @@
             let i = elements.length - 1;
 
             slideAnimationEndEventHandler = () => {
-                wrapper.className = 'fadeout';
-                wrapperAnimationEndEventHandler = () => {
-                    onClickLesson(wrapperId, classNamePrefix);
-                };
-                wrapper.addEventListener('animationend', wrapperAnimationEndEventHandler);
+                onClickLesson(wrapperId, classNamePrefix);
             };
             elements[i].addEventListener('animationend', slideAnimationEndEventHandler);
         }
