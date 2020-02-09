@@ -56,10 +56,10 @@
                 }
             }
             div#lesson2.fadeout {
-                animation-duration: 2s;/* アニメーション時間 */
+                animation-duration: 1s;/* アニメーション時間 */
                 animation-name: Fadeout;/* アニメーション名 */
                 animation-iteration-count: 1;
-                animation-delay: 1s;
+                animation-delay: 100ms;
                 animation-fill-mode: forwards;
             }
             h1.double-slide1 {
@@ -135,7 +135,7 @@
                     elements[i].className = classNamePrefix + (i + 1);
 
                 }
-            }, 1000);
+            }, 10);
         }
 
         function registerRepeatOnce(wrapperId, classNamePrefix) {
