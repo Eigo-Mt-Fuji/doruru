@@ -1,0 +1,71 @@
+<html>
+
+
+    <head>
+        <title>CSS Animation Lesson</title>
+        <style>
+            /* 「RightToLeft」の動作内容 */
+            @keyframes RightToLeft {
+                0% {
+                    opacity: 0;/* 透明 */
+                    transform: translateX(50px);/* X軸方向に50px */
+                }
+                100% {
+                    opacity: 1;/* 不透明 */
+                    transform: translateX(0);
+                }
+            }
+            h1.slide-default {
+                display: none;
+            }
+            /* 「RightToLeft」を適用する箇所 */
+            h1.slide1 {
+                animation-duration: 3s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 0s;
+                animation-fill-mode: both;
+            }
+
+            h1.slide2 {
+                animation-duration: 3s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 4s;
+                animation-fill-mode: both;
+            }
+
+            h1.slide3 {
+                animation-duration: 3s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 7s;
+                animation-fill-mode: both;
+            }
+        </style>
+        <script>
+        function onClickLesson1() {
+  
+            const wrapper = document.getElementById("lesson1");
+            const elements = wrapper.childNodes;
+            elements.forEach( (element, index) => {
+                element.className = "slide" + (index + 1);
+            });
+
+        }
+        </script>
+    </head>
+    
+    <body>
+        <div>
+            <span>どうでも良いことをゆっくり一度だけ言う</span>
+            <button onclick="onClickLesson1()">はよ言え</button>
+            <div id="lesson1">
+                <h1 class="slide-default">アマゾンで</h1>
+                <h1 class="slide-default">マスクの値段</h1>
+                <h1 class="slide-default">めっちゃ高くなってる</h1>
+            </div>
+        </div>
+        
+    </body>
+</html>
