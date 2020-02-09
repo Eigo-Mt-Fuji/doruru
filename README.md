@@ -12,15 +12,10 @@
 
 
 ## 入門
-
-* [Lesson1: どうでも良いことをゆっくり一度だけ言う](./index.html)
-  - TODO
-
-* Lesson2: 大事なことだから２回言う
-  - TODO
-
-* Lesson3: 忙しい人のために早口で言う
-  - TODO
+* https://eigo-mt-fuji.github.io/doruru/index.html
+  * Lesson1: どうでも良いことをゆっくり一度だけ言う
+  * Lesson2: 大事なことだから２回言う
+  * Lesson3: 忙しい人のために早口で言う
 
 ## 参考
 
