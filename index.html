@@ -56,13 +56,13 @@
                 animation-duration: 2s;/* アニメーション時間 */
                 animation-name: Fadeout;/* アニメーション名 */
                 animation-iteration-count: 1;
-                animation-delay: 12s;
+                animation-delay: 0s;
                 animation-fill-mode: forwards;
             }
             h1.double-slide1 {
                 animation-duration: 2s;/* アニメーション時間 */
                 animation-name: RightToLeft;/* アニメーション名 */
-                animation-iteration-count: 2;
+                animation-iteration-count: 1;
                 animation-delay: 0s;
                 animation-fill-mode: both;
             }
@@ -70,7 +70,7 @@
             h1.double-slide2 {
                 animation-duration: 2s;/* アニメーション時間 */
                 animation-name: RightToLeft;/* アニメーション名 */
-                animation-iteration-count: 2;
+                animation-iteration-count: 1;
                 animation-delay: 2s;
                 animation-fill-mode: both;
             }
@@ -78,7 +78,7 @@
             h1.double-slide3 {
                 animation-duration: 2s;/* アニメーション時間 */
                 animation-name: RightToLeft;/* アニメーション名 */
-                animation-iteration-count: 2;
+                animation-iteration-count: 1;
                 animation-delay: 4s;
                 animation-fill-mode: both;
             }
@@ -112,12 +112,30 @@
         function onClickLesson(wraapperId, classNamePrefix) {
   
             const wrapper = document.getElementById(wraapperId);
-            wrapper.className = "fadeout"
+            wrapper.className = '';
+            wrapper.removeEventListener('animationend');
+
             const elements = wrapper.children;
             for(let i = 0; i < elements.length; i++) {
 
                 elements[i].className = classNamePrefix + (i + 1);
+
+                elements[i].removeEventListener('animationend');
             }
+        }
+
+        function registerRepeatOnce(wrapperId, classNamePrefix) {
+
+            const wrapper = document.getElementById(wraapperId);
+            const elements = wrapper.children;
+            let i = elements.length - 1;
+            elements[i].removeEventListener('animationend');
+            elements[i].addEventListener('animationend', () => {
+                wrapper.className = 'fadeout';
+                wrapper.addEventListener('animationend', () => {
+                    onClickLesson(wrapperId, classNamePrefix);
+                });
+            });
         }
         </script>
     </head>
@@ -125,7 +143,7 @@
     <body>
         <div>
             <span>どうでも良いことをゆっくり一度だけ言う</span>
-            <button onclick="onClickLesson1('lesson1', 'slide')">ゆっくり言う</button>
+            <button onclick="onClickLesson('lesson1', 'slide')">ゆっくり言う</button>
             <div id="lesson1">
                 <h1 class="slide-default">アマゾンで</h1>
                 <h1 class="slide-default">マスクの値段</h1>
@@ -135,7 +153,7 @@
         <hr>
         <div>
             <span>大事なことだから２回言う</span>
-            <button onclick="onClickLesson('lesson2', 'double-slide')">2回言う</button>
+            <button onclick="onClickLesson('lesson2', 'double-slide'); registerRepeatOnce('lesson2', 'double-slide')">2回言う</button>
             <div id="lesson2">
                 <h1 class="slide-default">明日</h1>
                 <h1 class="slide-default">雨だったら</h1>
