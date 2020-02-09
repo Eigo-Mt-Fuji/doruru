@@ -47,11 +47,11 @@
         function onClickLesson1() {
   
             const wrapper = document.getElementById("lesson1");
-            const elements = wrapper.childNodes;
-            elements.forEach( (element, index) => {
-                element.className = "slide" + (index + 1);
-            });
+            const elements = wrapper.children;
+            for(let i = 0; i < elements.length; i++) {
 
+                elements[i].className = "slide" + (index + 1);
+            }
         }
         </script>
     </head>
