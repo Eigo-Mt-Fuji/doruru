@@ -152,8 +152,8 @@
                         console.log("wrapperAnimationEndEventHandler ts=" + (new Date()).getTime());
                         onClickLesson(wrapperId, classNamePrefix);
                     };
-                    wrapper.addEventListener('animationend', wrapperAnimationEndEventHandler)
-                }, 0);
+                    wrapper.addEventListener('animationend', wrapperAnimationEndEventHandler);
+                }, 10);
             };
             elements[lastIndex].addEventListener('animationend', slideAnimationEndEventHandler);
         }   
