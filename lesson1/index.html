@@ -1,0 +1,193 @@
+<html>
+
+
+    <head>
+        <title>CSS Animation Lesson</title>
+        <style>
+            body>div {
+                height: 280px;
+            }
+            /* 「RightToLeft」の動作内容 */
+            @keyframes RightToLeft {
+                0% {
+                    opacity: 0;/* 透明 */
+                    transform: translateX(50px);/* X軸方向に50px */
+                }
+                100% {
+                    opacity: 1;/* 不透明 */
+                    transform: translateX(0);
+                }
+            }
+            h1.slide-default {
+                display: none;
+            }
+            /* 「RightToLeft」を適用する箇所 */
+            h1.slide1 {
+                animation-duration: 3s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 0s;
+                animation-fill-mode: both;
+            }
+
+            h1.slide2 {
+                animation-duration: 3s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 4s;
+                animation-fill-mode: both;
+            }
+
+            h1.slide3 {
+                animation-duration: 3s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 7s;
+                animation-fill-mode: both;
+            }
+            
+            /* 「RightToLeft」の動作内容 */
+            @keyframes Fadeout {
+                0% {
+                    opacity: 1;/* 不透明 */
+                }
+                100% {
+                    opacity: 0;/* 透明 */
+                }
+            }
+            div#lesson2.fadeout {
+                animation-duration: 1s;/* アニメーション時間 */
+                animation-name: Fadeout;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 100ms;
+                animation-fill-mode: forwards;
+            }
+            h1.double-slide1 {
+                animation-duration: 2s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 0s;
+                animation-fill-mode: both;
+            }
+
+            h1.double-slide2 {
+                animation-duration: 2s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 2s;
+                animation-fill-mode: both;
+            }
+
+            h1.double-slide3 {
+                animation-duration: 2s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 4s;
+                animation-fill-mode: both;
+            }
+
+            /* 「RightToLeft」を適用する箇所 */
+            h1.quick-slide1 {
+                animation-duration: 1s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 0s;
+                animation-fill-mode: both;
+            }
+
+            h1.quick-slide2 {
+                animation-duration: 1s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 1s;
+                animation-fill-mode: both;
+            }
+
+            h1.quick-slide3 {
+                animation-duration: 1s;/* アニメーション時間 */
+                animation-name: RightToLeft;/* アニメーション名 */
+                animation-iteration-count: 1;
+                animation-delay: 2s;
+                animation-fill-mode: both;
+            }
+        </style>
+        <script>
+        let wrapperAnimationEndEventHandler;
+        let slideAnimationEndEventHandler;
+        function onClickLesson(wraapperId, classNamePrefix) {
+  
+            const wrapper = document.getElementById(wraapperId);
+            wrapper.className = '';
+            if(wrapperAnimationEndEventHandler) {
+                wrapper.removeEventListener('animationend', wrapperAnimationEndEventHandler);
+            }
+
+            const elements = wrapper.children;
+            for(let i = 0; i < elements.length; i++) {
+                elements[i].className = "slide-default";
+                if (i + 1 === elements.length && slideAnimationEndEventHandler) {
+                    elements[i].removeEventListener('animationend', slideAnimationEndEventHandler);
+                }
+            }
+            setTimeout(() => {
+
+                for(let i = 0; i < elements.length; i++) {
+                    elements[i].className = classNamePrefix + (i + 1);
+
+                }
+            }, 10);
+        }
+
+        function registerRepeatOnce(wrapperId, classNamePrefix) {
+
+            const wrapper = document.getElementById(wrapperId);
+            const elements = wrapper.children;
+            let lastIndex = elements.length - 1;
+
+            slideAnimationEndEventHandler = () => {
+                wrapper.className = 'fadeout';
+                setTimeout(() => {
+                    
+                    wrapperAnimationEndEventHandler = () => {
+                        console.log("wrapperAnimationEndEventHandler ts=" + (new Date()).getTime());
+                        onClickLesson(wrapperId, classNamePrefix);
+                    };
+                    wrapper.addEventListener('animationend', wrapperAnimationEndEventHandler);
+                }, 10);
+            };
+            elements[lastIndex].addEventListener('animationend', slideAnimationEndEventHandler);
+        }   
+        </script>
+    </head>
+    
+    <body>
+        <div>
+            <span>どうでも良いことをゆっくり一度だけ言う</span>
+            <button onclick="onClickLesson('lesson1', 'slide')">ゆっくり言う</button>
+            <div id="lesson1">
+                <h1 class="slide-default">アマゾンで</h1>
+                <h1 class="slide-default">マスクの値段</h1>
+                <h1 class="slide-default">めっちゃ高くなってる</h1>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <span>大事なことだから２回言う</span>
+            <button onclick="onClickLesson('lesson2', 'double-slide'); registerRepeatOnce('lesson2', 'double-slide')">2回言う</button>
+            <div id="lesson2">
+                <h1 class="slide-default">明日</h1>
+                <h1 class="slide-default">雨だったら</h1>
+                <h1 class="slide-default">仕事休みます</h1>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <span>忙しい人のために早口で言う</span>
+            <button onclick="onClickLesson('lesson3', 'quick-slide')">早口で言う</button>
+            <div id="lesson3">
+                <h1 class="slide-default">なまむぎなまごめなまたまご、なまむぎなまごめなまたまご、なまむぎなまごめなまたまご！</h1>
+            </div>
+        </div>
+
+    </body>
+</html>
